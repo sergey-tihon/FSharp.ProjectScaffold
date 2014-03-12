@@ -90,23 +90,23 @@ let buildDocumentation () =
 // Otherwise, version conflict can break code tips.
 let execute pipeline =
     // Cache `FSharp.Core.*` files
-    let files = 
-        !! (bin @@ "FSharp.Core.*")
-        |> Seq.toArray
-        |> Array.map (fun file ->
-            (file, File.ReadAllBytes file))
-    if (files.Length > 0) then
-        TraceHelper.traceError "Consider setting CopyLocal to False for FSharp.Core in all *.fsproj files"
-    // Remove `FSharp.Core.*` files
-    files |> Seq.iter (fun (file,_) ->
-        TraceHelper.traceImportant <| sprintf  "Removing '%s'" file
-        File.Delete file)
+    //let files = 
+    //    !! (bin @@ "FSharp.Core.*")
+    //    |> Seq.toArray
+    //    |> Array.map (fun file ->
+    //        (file, File.ReadAllBytes file))
+    //if (files.Length > 0) then
+    //    TraceHelper.traceError "Consider setting CopyLocal to False for FSharp.Core in all *.fsproj files"
+    //// Remove `FSharp.Core.*` files
+    //files |> Seq.iter (fun (file,_) ->
+    //    TraceHelper.traceImportant <| sprintf  "Removing '%s'" file
+    //    File.Delete file)
     // Execute document generation pipeline
     pipeline()
     // Restore `FSharp.Core.*` files
-    files |> Seq.iter (fun (file, bytes) ->
-        TraceHelper.traceImportant <| sprintf "Restoring '%s'" file
-        File.WriteAllBytes(file, bytes))
+    //files |> Seq.iter (fun (file, bytes) ->
+    //    TraceHelper.traceImportant <| sprintf "Restoring '%s'" file
+    //    File.WriteAllBytes(file, bytes))
 
 
 // Generate
